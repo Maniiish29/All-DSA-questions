@@ -1,1 +1,64 @@
-h
+class StackUsingLinkedlist {
+
+    // A node class to store data and the link to the next node
+    private class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    private Node top; // Acting as the 'head' of the linked list
+
+    public StackUsingLinkedlist() {
+        this.top = null;
+    }
+
+    // Add element to the top of the stack
+    public void push(int x) {
+        Node newNode = new Node(x);
+        newNode.next = top; // Link the new node to the previous top
+        top = newNode;      // Update top to the new node
+        System.out.println(x + " pushed to stack");
+    }
+
+    // Remove the top element
+    public int pop() {
+        if (isEmpty()) {
+            System.out.println("Stack Underflow");
+            return -1;
+        }
+        int poppedValue = top.data;
+        top = top.next; // Move top to the next node
+        return poppedValue;
+    }
+
+    // Look at the top element without removing it
+    public int peek() {
+        if (!isEmpty()) {
+            return top.data;
+        } else {
+            System.out.println("Stack is empty");
+            return -1;
+        }
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+
+    public static void main(String[] args) {
+        StackUsingLinkedlist stack = new StackUsingLinkedlist();
+
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        System.out.println("Top element is: " + stack.peek());
+        System.out.println("Popped element: " + stack.pop());
+        System.out.println("Top element after pop: " + stack.peek());
+    }
+}
