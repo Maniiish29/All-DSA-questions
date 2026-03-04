@@ -1,0 +1,62 @@
+class CircularQueue {
+    private int[] arr;
+    private int front, rear, size, capacity;
+
+    public CircularQueue(int n) {
+        capacity = n;
+        arr = new int[n];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    public boolean isFull() {
+        return size == capacity;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void enqueue(int data) {
+        if (isFull()) {
+            System.out.println("Queue is Full");
+            return;
+        }
+        // Move rear circularly
+        rear = (rear + 1) % capacity;
+        arr[rear] = data;
+        size++;
+    }
+
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is Empty");
+            return -1;
+        }
+        int result = arr[front];
+        // Move front circularly
+        front = (front + 1) % capacity;
+        size--;
+        return result;
+    }
+
+    public int peek() {
+        if (isEmpty()) return -1;
+        return arr[front];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CircularQueue cq = new CircularQueue(3);
+        cq.enqueue(10);
+        cq.enqueue(20);
+        cq.enqueue(30);
+        
+        System.out.println("Dequeued: " + cq.dequeue()); // Removes 10
+        
+        cq.enqueue(40); // This works in Circular Queue because it wraps around!
+        System.out.println("Front is now: " + cq.peek());
+    }
+}
