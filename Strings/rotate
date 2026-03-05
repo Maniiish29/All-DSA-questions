@@ -1,0 +1,19 @@
+public class StringRotation {
+    public static String rotateLeft(String str, int d) {
+        // Handle cases where d > str.length()
+        d = d % str.length(); 
+        return str.substring(d) + str.substring(0, d);
+    }
+
+    public static String rotateRight(String str, int d) {
+        int len = str.length();
+        d = d % len;
+        return str.substring(len - d) + str.substring(0, len - d);
+    }
+
+    public static void main(String[] args) {
+        String s = "ABCDE";
+        System.out.println("Left Rotate by 2: " + rotateLeft(s, 2));   // CDEAB
+        System.out.println("Right Rotate by 2: " + rotateRight(s, 2)); // DEABC
+    }
+}
